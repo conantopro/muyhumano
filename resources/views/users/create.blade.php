@@ -16,6 +16,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/adminlte.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
 @endsection
 
 @section('navbar')
@@ -154,91 +155,85 @@
 @endsection
 
 @section('content')
-    <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
-        {{-- <div class="content-header">
-            <div class="container-fluid">
-                <div class="row mb-2">
-                    <div class="col-sm-6">
-                        <h1 class="m-0">Crear Usuario</h1>
-                    </div>
-                    <div class="col-sm-6">
-                        <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Starter Page</li>
-                        </ol>
-                    </div>
-                </div>
-            </div>
-        </div> --}}
-        <!-- /.content-header -->
-        <!-- Main content -->
         <div class="content">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="form-group mt-4">
-                            <a href="/home" class="btn btn-primary btn-lg" role="button" aria-pressed="true"><i class="fa fa-chevron-left"></i> Dashboard</a>
+                            <a href="/home" class="btn btn-primary" role="button" aria-pressed="true"><i class="fa fa-chevron-left"></i> Dashboard</a>
                         </div>
-                        <div class="card card-primary card-outline">
-                            <div class="card-header">
-                                <h5 class="m-0">Crear Usuario</h5>
-                            </div>
-                            <div class="card-body">
-                                <form method="POST" action="" enctype="multipart/form-data">
-                                    @csrf
-                                    
+                        <form method="POST" action="{{ route('users.store') }}" enctype="multipart/form-data">
+                        @csrf
+                            <div class="card card-primary card-outline">
+                                <div class="card-header">
+                                    <h5 class="m-0">Crear Usuario</h5>
+                                </div>
+                                <div class="card-body">
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="box box-primary">
-                                                <div class="box-header">
-                                                    <h4>Información tarjeta</h4>
-                                                    <span class="comentario"> (Los campos marcados con * son obligatorios)</span>
-                                                </div>
                                                 <div class="box-body">
-                            
-                                                    <input type="hidden" name="empresa_id" value="#">
-                            
-                                                    <div class="row">
-                                                        <div class="col-md-6">
-                                                            <div class="form-group {{ $errors->has('nombres') ? 'has-error' : '' }}">
-                                                                <label>Nombres*</label>
-                                                                <input type="text" name="nombres" class="form-control textbox" value="{{ old('nombres') }}">
-                                                                {!! $errors->first('nombres', '<span class="help-block">:message</span>') !!}
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            <div class="form-group {{ $errors->has('apellidos') ? 'has-error' : '' }}">
-                                                                <label>Apellidos*</label>
-                                                                <input type="text" name="apellidos" class="form-control textbox" value="{{ old('apellidos') }}">
-                                                                {!! $errors->first('apellidos', '<span class="help-block">:message</span>') !!}
-                                                            </div>
-                                                        </div>
+                                                    {{-- <input type="hidden" name="empresa_id" value="#"> --}}
+                                                    <div class="form-group {{ $errors->has('name') ? 'has-error' : '' }}">
+                                                        <label for="name" class="">Nombre</label>
+                                                        <input type="text" id="name" name="name" class="form-control textbox" value="{{ old('name') }}" autofocus>
+                                                        {!! $errors->first('name', '<span class="help-block">:message</span>') !!}
                                                     </div>
-                                                    <div class="row">
-                                                        <div class="col-md-12">
-                                                            <div class="form-group">
-                                                                <button type="submit" class="btn btn-primary btn-lg">Guardar Usuario</button>
-                                                            </div>
-                                                        </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="box box-primary">
+                                                <div class="box-body">
+                                                    <input type="hidden" name="empresa_id" value="#">
+                                                    <div class="form-group {{ $errors->has('username') ? 'has-error' : '' }}">
+                                                        <label for="username">Nombre de usuario</label>
+                                                        <input type="text" id="username" name="username" class="form-control textbox" value="{{ old('username') }}">
+                                                        {!! $errors->first('username', '<span class="help-block">:message</span>') !!}
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </form>
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="box box-primary">
+                                                <div class="box-body">
+                                                    <div class="form-group {{ $errors->has('email') ? 'has-error' : '' }}">
+                                                        <label for="email">Email</label>
+                                                        <input type="email" id="email" name="email" class="form-control textbox" value="{{ old('email') }}">
+                                                        {!! $errors->first('email', '<span class="help-block">:message</span>') !!}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="box box-primary">
+                                                <div class="box-body">
+                                                    <div class="form-group {{ $errors->has('password') ? 'has-error' : '' }}">
+                                                        <label for="password">Contraseña</label>
+                                                        <input type="password" id="password" name="password" class="form-control textbox" value="{{ old('password') }}">
+                                                        {!! $errors->first('password', '<span class="help-block">:message</span>') !!}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-footer ml-auto mr-auto bg-transparent">
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-primary">Guardar Usuario</button>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
+                        </form>
                     </div>
-                    <!-- /.col-md-6 -->
                 </div>
-                <!-- /.row -->
-            </div><!-- /.container-fluid -->
+            </div>
         </div>
-        <!-- /.content -->
     </div>
-    <!-- /.content-wrapper -->
 @endsection
 
 @section('footer')
