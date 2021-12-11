@@ -133,7 +133,7 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="#" class="nav-link {{ request()->is('users/show') ? 'active' : '' }}">
+                            <a href="/users" class="nav-link {{ request()->is('users') ? 'active' : '' }}">
                                 {{-- <i class="far fa-circle nav-icon"></i> --}}
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Ver Usuarios</p>

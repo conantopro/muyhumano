@@ -14,6 +14,11 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <link rel="stylesheet" href="{{ asset('plugins/fontawesome-free/css/all.min.css') }}">
 
+    <!-- DataTables -->
+    <link rel="stylesheet" href="{{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
+
     <!-- Styles -->
     <link href="{{ asset('css/adminlte.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
@@ -159,76 +164,58 @@
         <div class="content">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-lg-6">
+                    <div class="col-lg-12">
                         <div class="form-group mt-4">
                             <a href="/home" class="btn btn-primary" role="button" aria-pressed="true"><i class="fa fa-chevron-left"></i> Dashboard</a>
                         </div>
-                        <form method="POST" action="{{ route('users.store') }}" enctype="multipart/form-data">
-                        @csrf
-                            <div class="card card-primary card-outline">
-                                <div class="card-header">
-                                    <h5 class="m-0">Crear Usuario</h5>
-                                </div>
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="box box-primary">
-                                                <div class="box-body">
-                                                    {{-- <input type="hidden" name="empresa_id" value="#"> --}}
-                                                    <div class="form-group {{ $errors->has('name') ? 'has-error' : '' }}">
-                                                        <label for="name" class="">Nombre</label>
-                                                        <input type="text" id="name" name="name" class="form-control textbox" value="{{ old('name') }}" autofocus>
-                                                        {!! $errors->first('name', '<span class="help-block">:message</span>') !!}
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="box box-primary">
-                                                <div class="box-body">
-                                                    <input type="hidden" name="empresa_id" value="#">
-                                                    <div class="form-group {{ $errors->has('username') ? 'has-error' : '' }}">
-                                                        <label for="username">Nombre de usuario</label>
-                                                        <input type="text" id="username" name="username" class="form-control textbox" value="{{ old('username') }}">
-                                                        {!! $errors->first('username', '<span class="help-block">:message</span>') !!}
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="box box-primary">
-                                                <div class="box-body">
-                                                    <div class="form-group {{ $errors->has('email') ? 'has-error' : '' }}">
-                                                        <label for="email">Email</label>
-                                                        <input type="email" id="email" name="email" class="form-control textbox" value="{{ old('email') }}">
-                                                        {!! $errors->first('email', '<span class="help-block">:message</span>') !!}
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="box box-primary">
-                                                <div class="box-body">
-                                                    <div class="form-group {{ $errors->has('password') ? 'has-error' : '' }}">
-                                                        <label for="password">Contraseña</label>
-                                                        <input type="password" id="password" name="password" class="form-control textbox" value="{{ old('password') }}">
-                                                        {!! $errors->first('password', '<span class="help-block">:message</span>') !!}
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card-footer ml-auto mr-auto bg-transparent">
-                                    <div class="form-group">
-                                        <button type="submit" class="btn btn-primary">Guardar Usuario</button>
-                                    </div>
-                                </div>
+                        <div class="card">
+                            <div class="card-header">
+                              <h3 class="card-title">Listado de Usuarios</h3>
                             </div>
-                        </form>
+                            <!-- /.card-header -->
+                            <div class="card-body">
+                                @if(session('success'))
+                                    <div class="alert alert-success" role="success">
+                                        {{ session('success') }}
+                                    </div>
+                                @endif
+                                <table id="example1" class="table table-bordered table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Nombre</th>
+                                            <th>Usuario</th>
+                                            <th>Email</th>
+                                            <th class="text-right">Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($users as $user)
+                                            <tr>
+                                                <td>{{ $user->name }}</td>
+                                                <td>{{ $user->username }}</td>
+                                                <td>{{ $user->email }}</td>
+                                                <td class="text-right">
+                                                    <a href="#"  target="_blank" class="btn btn-xs btn-success"><i class="fa fa-search"></i></a>
+                                                    <a href="#" class="btn btn-xs btn-info"><i class="fa fa-pencil-alt"></i></a>
+                                                    <a href="#" class="btn btn-xs btn-warning"><i class="fa fa-cog"></i></a>
+                                                    <a href="#" class="btn btn-xs btn-danger"><i class="fa fa-times"></i></a>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                    <tfoot>
+                                    <tr>
+                                        <th>Nombre</th>
+                                        <th>Usuario</th>
+                                        <th>Email</th>
+                                        <th class="text-right">Acciones</th>
+                                    </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
+                        <!-- /.card -->
                     </div>
                 </div>
             </div>
@@ -252,6 +239,39 @@
     <script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <!-- AdminLTE App -->
     <script src="{{ asset('js/adminlte.min.js') }}"></script>
+    <!-- DataTables  & Plugins -->
+    <script src="{{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
+    <script src="{{ asset('plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('plugins/datatables-buttons/js/dataTables.buttons.min.js') }}"></script>
+    <script src="{{ asset('plugins/datatables-buttons/js/buttons.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('plugins/jszip/jszip.min.js') }}"></script>
+    <script src="{{ asset('plugins/pdfmake/pdfmake.min.js') }}"></script>
+    <script src="{{ asset('plugins/pdfmake/vfs_fonts.js') }}"></script>
+    <script src="{{ asset('plugins/datatables-buttons/js/buttons.html5.min.js') }}"></script>
+    <script src="{{ asset('plugins/datatables-buttons/js/buttons.print.min.js') }}"></script>
+    <script src="{{ asset('plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
+    <!-- AdminLTE for demo purposes -->
+    {{-- <script src="../../dist/js/demo.js"></script> --}}
+    <!-- Page specific script -->
+    <script>
+    $(function () {
+        $("#example1").DataTable({
+        "responsive": true, "lengthChange": false, "autoWidth": false,
+        "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+        }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+        $('#example2').DataTable({
+        "paging": true,
+        "lengthChange": false,
+        "searching": false,
+        "ordering": true,
+        "info": true,
+        "autoWidth": false,
+        "responsive": true,
+        });
+    });
+    </script>
 @endsection
 
 {{-- @section('content')
