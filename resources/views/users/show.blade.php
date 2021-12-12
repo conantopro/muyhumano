@@ -14,11 +14,6 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <link rel="stylesheet" href="{{ asset('plugins/fontawesome-free/css/all.min.css') }}">
 
-    <!-- DataTables -->
-    <link rel="stylesheet" href="{{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
-
     <!-- Styles -->
     <link href="{{ asset('css/adminlte.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
@@ -164,62 +159,88 @@
         <div class="content">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-lg-12">
+                    <div class="col-lg-6">
                         <div class="form-group mt-4">
                             <a href="/home" class="btn btn-primary" role="button" aria-pressed="true"><i class="fa fa-chevron-left"></i> Dashboard</a>
                         </div>
-                        <div class="card">
-                            <div class="card-header">
-                              <h3 class="card-title">Listado de Usuarios</h3>
+                        @if(session('success'))
+                            <div class="alert alert-success alert-dismissible">
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                {{-- <h5><i class="icon fas fa-check"></i> Alert!</h5> --}}
+                                {{ session('success') }}
                             </div>
-                            <div class="card-body">
-                                @if(session('success'))
-                                    <div class="alert alert-success alert-dismissible">
-                                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                                        {{-- <h5><i class="icon fas fa-check"></i> Alert!</h5> --}}
-                                        {{ session('success') }}
-                                    </div>
-                                @endif
-                                <table id="example1" class="table table-bordered table-striped">
-                                    <thead>
-                                        <tr>
-                                            <th>Nombre</th>
-                                            <th>Usuario</th>
-                                            <th>Email</th>
-                                            <th class="text-right">Acciones</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach ($users as $user)
-                                            <tr>
-                                                <td>{{ $user->name }}</td>
-                                                <td>{{ $user->username }}</td>
-                                                <td>{{ $user->email }}</td>
-                                                <td class="text-right">
-                                                    <a href="{{ route('users.show', $user->id) }}" class="btn btn-xs btn-success"><i class="fa fa-eye"></i></a>
-                                                    <a href="{{ route('users.edit', $user->id) }}" class="btn btn-xs btn-info"><i class="fa fa-pencil-alt"></i></a>
-                                                    <form method="POST" action="{{ route('users.destroy', $user) }}" style="display: inline-block;" class="form-delete">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                        <button class="btn btn-xs btn-danger" type="submit" rel="tooltip">
-                                                            <i class="fa fa-times"></i>
-                                                        </button>
-                                                    </form>
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                    </tbody>
-                                    <tfoot>
-                                    <tr>
-                                        <th>Nombre</th>
-                                        <th>Usuario</th>
-                                        <th>Email</th>
-                                        <th class="text-right">Acciones</th>
-                                    </tr>
-                                    </tfoot>
-                                </table>
+                        @endif
+                        <!-- Profile Image -->
+                        <div class="card card-primary card-outline">
+                            <div class="card-body box-profile">
+                                <div class="text-center">
+                                    <img class="profile-user-img img-fluid img-circle"
+                                        src="{{ asset('img/avatar-default.png') }}"
+                                        alt="User profile picture">
+                                </div>
+                
+                                <h3 class="profile-username text-center">{{ $user->name }}</h3>
+                
+                                <p class="text-muted text-center">Usuario: {{ $user->username }}</p>
+                
+                                <ul class="list-group list-group-unbordered mb-3">
+                                    <li class="list-group-item">
+                                        <b>Email</b> <a class="float-right">{{ $user->email }}</a>
+                                    </li>
+                                    {{-- <li class="list-group-item">
+                                        <b>Following</b> <a class="float-right">543</a>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <b>Friends</b> <a class="float-right">13,287</a>
+                                    </li> --}}
+                                </ul>
+                
+                                <a href="{{ route('users.edit', $user) }}" class="btn btn-primary btn-block"><b>Editar</b></a>
                             </div>
+                            <!-- /.card-body -->
                         </div>
+                        <!-- /.card -->
+            
+                        <!-- About Me Box -->
+                        <div class="card card-primary">
+                            <div class="card-header">
+                                <h3 class="card-title">About Me</h3>
+                            </div>
+                            <!-- /.card-header -->
+                            <div class="card-body">
+                                <strong><i class="fas fa-book mr-1"></i> Education</strong>
+                
+                                <p class="text-muted">
+                                    B.S. in Computer Science from the University of Tennessee at Knoxville
+                                </p>
+                
+                                <hr>
+                
+                                <strong><i class="fas fa-map-marker-alt mr-1"></i> Location</strong>
+                
+                                <p class="text-muted">Malibu, California</p>
+                
+                                <hr>
+                
+                                <strong><i class="fas fa-pencil-alt mr-1"></i> Skills</strong>
+                
+                                <p class="text-muted">
+                                    <span class="tag tag-danger">UI Design</span>
+                                    <span class="tag tag-success">Coding</span>
+                                    <span class="tag tag-info">Javascript</span>
+                                    <span class="tag tag-warning">PHP</span>
+                                    <span class="tag tag-primary">Node.js</span>
+                                </p>
+                
+                                <hr>
+                
+                                <strong><i class="far fa-file-alt mr-1"></i> Notes</strong>
+                
+                                <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum enim neque.</p>
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
+                        <!-- /.card -->
                     </div>
                 </div>
             </div>
@@ -243,71 +264,6 @@
     <script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <!-- AdminLTE App -->
     <script src="{{ asset('js/adminlte.min.js') }}"></script>
-    <!-- DataTables  & Plugins -->
-    <script src="{{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
-    <script src="{{ asset('plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
-    <script src="{{ asset('plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
-    <script src="{{ asset('plugins/datatables-buttons/js/dataTables.buttons.min.js') }}"></script>
-    <script src="{{ asset('plugins/datatables-buttons/js/buttons.bootstrap4.min.js') }}"></script>
-    <script src="{{ asset('plugins/jszip/jszip.min.js') }}"></script>
-    <script src="{{ asset('plugins/pdfmake/pdfmake.min.js') }}"></script>
-    <script src="{{ asset('plugins/pdfmake/vfs_fonts.js') }}"></script>
-    <script src="{{ asset('plugins/datatables-buttons/js/buttons.html5.min.js') }}"></script>
-    <script src="{{ asset('plugins/datatables-buttons/js/buttons.print.min.js') }}"></script>
-    <script src="{{ asset('plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
-    <!-- AdminLTE for demo purposes -->
-    {{-- <script src="../../dist/js/demo.js"></script> --}}
-    <!-- Page specific script -->
-    <script>
-    $(function () {
-        $("#example1").DataTable({
-        "responsive": true, "lengthChange": false, "autoWidth": false,
-        "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-        }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-        $('#example2').DataTable({
-        "paging": true,
-        "lengthChange": false,
-        "searching": false,
-        "ordering": true,
-        "info": true,
-        "autoWidth": false,
-        "responsive": true,
-        });
-    });
-    </script>
-
-    @if(session('eliminar') == 'Ok')
-        <script>
-            Swal.fire(
-                'Deleted!',
-                'Your file has been deleted.',
-                'success'
-            )
-        </script>
-    @endif
-
-    <script>
-        $('.form-delete').submit(function(e){
-            e.preventDefault();
-
-            Swal.fire({
-                title: 'Are you sure?',
-                text: "You won't be able to revert this!",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, delete it!'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    this.submit();
-                }
-            })
-        });
-
-        
-    </script>
 @endsection
 
 {{-- @section('content')
