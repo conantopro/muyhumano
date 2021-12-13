@@ -177,7 +177,7 @@
                                                     {{-- <input type="hidden" name="empresa_id" value="#"> --}}
                                                     <div class="form-group {{ $errors->has('name') ? 'has-error' : '' }}">
                                                         <label for="name" class="">Nombre</label>
-                                                        <input type="text" id="name" name="name" class="form-control textbox" value="{{ old('name') }}" autofocus>
+                                                        <input type="text" id="name" name="name" class="form-control textbox" value="{{ old('name') }}" autofocus required>
                                                         {!! $errors->first('name', '<span class="help-block">:message</span>') !!}
                                                     </div>
                                                 </div>
