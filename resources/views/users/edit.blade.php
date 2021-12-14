@@ -176,10 +176,12 @@
                                             <div class="box box-primary">
                                                 <div class="box-body">
                                                     {{-- <input type="hidden" name="empresa_id" value="#"> --}}
-                                                    <div class="form-group {{ $errors->has('name') ? 'has-error' : '' }}">
+                                                    <div class="form-group">
                                                         <label for="name" class="">Nombre</label>
                                                         <input type="text" id="name" name="name" class="form-control textbox" value="{{ old('name', $user->name) }}" autofocus>
-                                                        {!! $errors->first('name', '<span class="help-block">:message</span>') !!}
+                                                        @if($errors->has('name'))
+                                                            <span class="error text-danger" for="input-name">{{ $errors->first('name') }}</span>
+                                                        @endif{!! $errors->first('name', '<span class="help-block">:message</span>') !!}
                                                     </div>
                                                 </div>
                                             </div>
@@ -188,10 +190,12 @@
                                             <div class="box box-primary">
                                                 <div class="box-body">
                                                     <input type="hidden" name="empresa_id" value="#">
-                                                    <div class="form-group {{ $errors->has('username') ? 'has-error' : '' }}">
+                                                    <div class="form-group">
                                                         <label for="username">Nombre de usuario</label>
                                                         <input type="text" id="username" name="username" class="form-control textbox" value="{{ old('username', $user->username) }}">
-                                                        {!! $errors->first('username', '<span class="help-block">:message</span>') !!}
+                                                        @if($errors->has('username'))
+                                                            <span class="error text-danger" for="input-username">{{ $errors->first('username') }}</span>
+                                                        @endif
                                                     </div>
                                                 </div>
                                             </div>
@@ -202,10 +206,12 @@
                                         <div class="col-md-6">
                                             <div class="box box-primary">
                                                 <div class="box-body">
-                                                    <div class="form-group {{ $errors->has('email') ? 'has-error' : '' }}">
+                                                    <div class="form-group">
                                                         <label for="email">Email</label>
                                                         <input type="email" id="email" name="email" class="form-control textbox" value="{{ old('email', $user->email) }}">
-                                                        {!! $errors->first('email', '<span class="help-block">:message</span>') !!}
+                                                        @if($errors->has('email'))
+                                                            <span class="error text-danger" for="input-email">{{ $errors->first('email') }}</span>
+                                                        @endif
                                                     </div>
                                                 </div>
                                             </div>
@@ -213,10 +219,12 @@
                                         <div class="col-md-6">
                                             <div class="box box-primary">
                                                 <div class="box-body">
-                                                    <div class="form-group {{ $errors->has('password') ? 'has-error' : '' }}">
+                                                    <div class="form-group">
                                                         <label for="password">Contraseña</label>
                                                         <input type="password" id="password" name="password" class="form-control textbox" value="{{ old('password') }}">
-                                                        {!! $errors->first('password', '<span class="help-block">:message</span>') !!}
+                                                        @if($errors->has('password'))
+                                                            <span class="error text-danger" for="input-password">{{ $errors->first('password') }}</span>
+                                                        @endif
                                                     </div>
                                                 </div>
                                             </div>

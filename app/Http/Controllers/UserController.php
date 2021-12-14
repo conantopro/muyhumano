@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UserCreateRequest;
+use App\Http\Requests\UserEditRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -18,8 +20,9 @@ class UserController extends Controller
         return view('users.create');
     }
 
-    public function store(Request $request)
+    public function store(UserCreateRequest $request)
     {
+        // Las validaciones se realizan en app/Http/Request/UserCreateRequest.php
         $user = User::create($request->only('name', 'username', 'email')
             + [
                 'password' => bcrypt($request->input('password')),
@@ -38,23 +41,14 @@ class UserController extends Controller
         return view('users.edit', compact('user'));
     }
 
-    public function update(Request $request, User $user)
+    public function update(UserEditRequest $request, User $user)
     {
+        // Las validaciones se realizan en app/Http/Request/UserEditRequest.php
         // $user = User::findOrFail($id);
         $data = $request->only('name', 'username', 'email');
         $password = $request->input('password');
         if($password)
             $data['password'] = bcrypt($password);
-        // if(trim($request->password) == '')
-        // {
-        //     $data = $request->except('password');
-        // }
-        // else
-        // {
-        //     $data = $request->all();
-        //     $data['password'] = bcrypt($request->password);
-        // }
-
         $user->update($data);
         return redirect()->route('users.show', $user->id)->with('success', 'Usuario actualizado exitosamente.');
     }
