@@ -20,4 +20,10 @@ Route::get('/users/{user}/edit', [UserController::class, 'edit'])->name('users.e
 Route::put('/users/{user}', [UserController::class, 'update'])->name('users.update');
 Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
 
+Route::get('/companies', [CompanyController::class, 'index'])->name('companies');
 Route::get('/companies/create', [CompanyController::class, 'create'])->name('companies.create');
+Route::post('/companies/store', [CompanyController::class, 'store'])->name('companies.store');
+Route::get('/companies/{company}', [CompanyController::class, 'show'])->name('companies.show');
+Route::get('/companies/{company}/edit', [CompanyController::class, 'edit'])->name('companies.edit');
+Route::put('/companies/{company}', [CompanyController::class, 'update'])->name('companies.update');
+Route::delete('/companies/{company}', [CompanyController::class, 'destroy'])->name('companies.destroy');
