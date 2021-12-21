@@ -57,13 +57,13 @@
                         <li class="nav-item">
                             <a href="/companies" class="nav-link {{ request()->is('companies') ? 'active' : '' }}">
                                 {{-- <i class="far fa-circle nav-icon"></i> --}}
-                                <i class="far fa-circle nav-icon"></i>
+                                <i class="nav-icon fas fa-ellipsis-h"></i>
                                 <p>Ver Empresas</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="/companies/create" class="nav-link {{ request()->is('companies/create') ? 'active' : '' }}">
-                                <i class="far fa-circle nav-icon"></i>
+                                <i class="nav-icon fas fa-ellipsis-h"></i>
                                 <p>Crear Empresa</p>
                             </a>
                         </li>
@@ -82,14 +82,38 @@
                         <li class="nav-item">
                             <a href="/users" class="nav-link {{ request()->is('users') ? 'active' : '' }}">
                                 {{-- <i class="far fa-circle nav-icon"></i> --}}
-                                <i class="far fa-circle nav-icon"></i>
+                                <i class="nav-icon fas fa-ellipsis-h"></i>
                                 <p>Ver Usuarios</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="/users/create" class="nav-link {{ request()->is('users/create') ? 'active' : '' }}">
-                                <i class="far fa-circle nav-icon"></i>
+                                <i class="nav-icon fas fa-ellipsis-h"></i>
                                 <p>Crear Usuario</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                {{-- <li class="nav-item menu-open"> --}}
+                <li class="nav-item {{ request()->is('permissions*') ? 'menu-open' : '' }}">
+                    <a href="#" class="nav-link {{ request()->is('permissions*') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-key"></i>
+                        <p>
+                            Permisos
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('permissions.index') }}" class="nav-link {{ request()->is('permissions') ? 'active' : '' }}">
+                                <i class="nav-icon fas fa-ellipsis-h"></i>
+                                <p>Ver Permisos</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('permissions.create') }}" class="nav-link {{ request()->is('permissions/create') ? 'active' : '' }}">
+                                <i class="nav-icon fas fa-ellipsis-h"></i>
+                                <p>Crear Permiso</p>
                             </a>
                         </li>
                     </ul>
