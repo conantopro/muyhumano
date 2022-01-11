@@ -118,6 +118,30 @@
                         </li>
                     </ul>
                 </li>
+                {{-- <li class="nav-item menu-open"> --}}
+                    <li class="nav-item {{ request()->is('roles*') ? 'menu-open' : '' }}">
+                        <a href="#" class="nav-link {{ request()->is('roles*') ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-robot"></i>
+                            <p>
+                                Roles
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="{{ route('roles.index') }}" class="nav-link {{ request()->is('roles') ? 'active' : '' }}">
+                                    <i class="nav-icon fas fa-ellipsis-h"></i>
+                                    <p>Ver Roles</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('roles.create') }}" class="nav-link {{ request()->is('roles/create') ? 'active' : '' }}">
+                                    <i class="nav-icon fas fa-ellipsis-h"></i>
+                                    <p>Crear Rol</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
             </ul>
         </nav>
         <!-- /.sidebar-menu -->

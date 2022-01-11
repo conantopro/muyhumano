@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreatePermissionRequest;
+use App\Http\Requests\EditPermissionRequest;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Permission;
 
@@ -16,7 +18,7 @@ class PermissionController extends Controller
     {
         $permissions = Permission::all();
 
-        return view('permissions.index', compact('permissions'));
+        return view('back.permissions.index', compact('permissions'));
     }
 
     /**
@@ -26,7 +28,7 @@ class PermissionController extends Controller
      */
     public function create()
     {
-        //
+        return view('back.permissions.create');
     }
 
     /**
@@ -37,7 +39,8 @@ class PermissionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Permission::create($request->only('name'));
+        return redirect()->route('permissions.index')->with('success', 'Permiso ingresado correctamente.');
     }
 
     /**
@@ -46,9 +49,9 @@ class PermissionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Permission $permission)
     {
-        //
+        return view('back.permissions.show', compact('permission'));
     }
 
     /**
@@ -57,9 +60,9 @@ class PermissionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Permission $permission)
     {
-        //
+        return view('back.permissions.edit', compact('permission'));
     }
 
     /**
@@ -69,9 +72,10 @@ class PermissionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Permission $permission)
     {
-        //
+        $permission->update($request->only('name'));
+        return redirect()->route('permissions.index')->with('success', 'Permiso actualizado correctamente.');
     }
 
     /**
@@ -80,8 +84,9 @@ class PermissionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Permission $permission)
     {
-        //
+        $permission->delete();
+        return redirect()->route('permissions.index')->with('success', 'Permiso eliminado correctamente.');
     }
 }

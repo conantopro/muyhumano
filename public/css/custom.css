@@ -1,3 +1,11 @@
 .form-group label:not(.form-check-label):not(.custom-file-label) {
     font-weight: 500;
 }
+
+.permission-badge {
+    font-weight: 400 !important;
+}
+
+.list-group-unbordered>.list-group-item {
+    border-bottom: 0 !important;
+}

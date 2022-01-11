@@ -74,6 +74,36 @@ $(function () {
     })
 </script>
 
+<script>
+  $('#delete-permission').on('show.bs.modal', function (event) {
+      var button = $(event.relatedTarget); // Button that triggered the modal
+      var id = button.data('id'); // Extract info from data-* attributes
+      var name = button.data('name'); // Extract info from data-* attributes
+
+      action = $('.form-delete').attr('data-action').slice(0, -1);
+      action += id;
+      $('.form-delete').attr('action', action);
+
+      var modal = $(this);
+      modal.find('.modal-title').text('Eliminar empresa: ' + name);
+  })
+</script>
+
+<script>
+  $('#delete-role').on('show.bs.modal', function (event) {
+      var button = $(event.relatedTarget); // Button that triggered the modal
+      var id = button.data('id'); // Extract info from data-* attributes
+      var name = button.data('name'); // Extract info from data-* attributes
+
+      action = $('.form-delete').attr('data-action').slice(0, -1);
+      action += id;
+      $('.form-delete').attr('action', action);
+
+      var modal = $(this);
+      modal.find('.modal-title').text('Eliminar empresa: ' + name);
+  })
+</script>
+
 <script src="{{ asset('plugins/chart.js/Chart.min.js') }}"></script>
 
 <script>

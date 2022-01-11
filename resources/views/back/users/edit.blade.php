@@ -76,6 +76,28 @@
                                             </div>
                                         </div>
                                     </div>
+
+                                    <div class="row">
+                                        <div class="col">
+                                            <hr>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        @foreach ($roles as $id => $role)
+                                            <div class="col-sm-4">
+                                                <div class="form-group">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio"
+                                                            id="role-{{ $id }}"
+                                                            name="roles[]"
+                                                            value="{{ $id }}" {{ $user->roles->contains($id) ? 'checked' : '' }}>
+                                                        <label for="role-{{ $id }}" class="form-check-label">{{ $role }}</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    </div>
                                 </div>
                                 <div class="card-footer ml-auto mr-auto bg-transparent">
                                     <div class="form-group">
