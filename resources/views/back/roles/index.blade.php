@@ -41,13 +41,17 @@
                                                     @endforelse
                                                 </td>
                                                 <td class="text-right">
-                                                    <a href="{{ route('roles.show', $role->id) }}" class="btn btn-xs btn-success"><i class="fa fa-eye"></i></a>
-                                                    <a href="{{ route('roles.edit', $role->id) }}" class="btn btn-xs btn-info"><i class="fa fa-pencil-alt"></i></a>
-                                                    
-                                                    <button type="submit" class="btn btn-xs btn-danger" data-toggle="modal" data-target="#delete-role" data-id="{{ $role->id }}" data-name="{{ $role->name }}">
-                                                        <i class="fa fa-times"></i>
-                                                    </button>
-                                                    
+                                                    @can('role_show')
+                                                        <a href="{{ route('roles.show', $role->id) }}" class="btn btn-xs btn-success"><i class="fa fa-eye"></i></a>
+                                                    @endcan
+                                                    @can('role_edit')
+                                                        <a href="{{ route('roles.edit', $role->id) }}" class="btn btn-xs btn-info"><i class="fa fa-pencil-alt"></i></a>
+                                                    @endcan
+                                                    @can('role_destroy')
+                                                        <button type="submit" class="btn btn-xs btn-danger" data-toggle="modal" data-target="#delete-role" data-id="{{ $role->id }}" data-name="{{ $role->name }}">
+                                                            <i class="fa fa-times"></i>
+                                                        </button>
+                                                    @endcan
                                                 </td>
                                             </tr>
                                         @endforeach

@@ -33,13 +33,17 @@
                                             <tr>
                                                 <td>{{ $permission->name }}</td>
                                                 <td class="text-right">
-                                                    <a href="{{ route('permissions.show', $permission->id) }}" class="btn btn-xs btn-success"><i class="fa fa-eye"></i></a>
-                                                    <a href="{{ route('permissions.edit', $permission->id) }}" class="btn btn-xs btn-info"><i class="fa fa-pencil-alt"></i></a>
-                                                    
-                                                    <button type="submit" class="btn btn-xs btn-danger" data-toggle="modal" data-target="#delete-permission" data-id="{{ $permission->id }}" data-name="{{ $permission->name }}">
-                                                        <i class="fa fa-times"></i>
-                                                    </button>
-                                                    
+                                                    @can('permission_show')
+                                                        <a href="{{ route('permissions.show', $permission->id) }}" class="btn btn-xs btn-success"><i class="fa fa-eye"></i></a>
+                                                    @endcan
+                                                    @can('permission_edit')
+                                                        <a href="{{ route('permissions.edit', $permission->id) }}" class="btn btn-xs btn-info"><i class="fa fa-pencil-alt"></i></a>
+                                                    @endcan
+                                                    @can('permission_destroy')
+                                                        <button type="submit" class="btn btn-xs btn-danger" data-toggle="modal" data-target="#delete-permission" data-id="{{ $permission->id }}" data-name="{{ $permission->name }}">
+                                                            <i class="fa fa-times"></i>
+                                                        </button>
+                                                    @endcan
                                                 </td>
                                             </tr>
                                         @endforeach

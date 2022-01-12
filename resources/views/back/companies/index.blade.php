@@ -35,13 +35,17 @@
                                                 <td>{{ $company->name }}</td>
                                                 <td>{{ $company->address }}</td>
                                                 <td class="text-right">
-                                                    <a href="{{ route('companies.show', $company->id) }}" class="btn btn-xs btn-success"><i class="fa fa-eye"></i></a>
-                                                    <a href="{{ route('companies.edit', $company->id) }}" class="btn btn-xs btn-info"><i class="fa fa-pencil-alt"></i></a>
-                                                    
-                                                    <button type="submit" class="btn btn-xs btn-danger" data-toggle="modal" data-target="#delete-company" data-id="{{ $company->id }}" data-name="{{ $company->name }}">
-                                                        <i class="fa fa-times"></i>
-                                                    </button>
-                                                    
+                                                    @can('company_show')
+                                                        <a href="{{ route('companies.show', $company->id) }}" class="btn btn-xs btn-success"><i class="fa fa-eye"></i></a>
+                                                    @endcan
+                                                    @can('company_edit')
+                                                        <a href="{{ route('companies.edit', $company->id) }}" class="btn btn-xs btn-info"><i class="fa fa-pencil-alt"></i></a>
+                                                    @endcan
+                                                    @can('company_destroy')
+                                                        <button type="submit" class="btn btn-xs btn-danger" data-toggle="modal" data-target="#delete-company" data-id="{{ $company->id }}" data-name="{{ $company->name }}">
+                                                            <i class="fa fa-times"></i>
+                                                        </button>
+                                                    @endcan
                                                 </td>
                                             </tr>
                                         @endforeach

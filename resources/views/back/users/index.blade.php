@@ -45,12 +45,17 @@
                                                     @endforelse
                                                 </td>
                                                 <td class="text-right">
-                                                    <a href="{{ route('users.show', $user->id) }}" class="btn btn-xs btn-success"><i class="fa fa-eye"></i></a>
-                                                    <a href="{{ route('users.edit', $user->id) }}" class="btn btn-xs btn-info"><i class="fa fa-pencil-alt"></i></a>
-                                                    
-                                                    <button type="submit" class="btn btn-xs btn-danger" data-toggle="modal" data-target="#deleteModal" data-id="{{ $user->id }}" data-name="{{ $user->name }}">
-                                                        <i class="fa fa-times"></i>
-                                                    </button>
+                                                    @can('user_show')
+                                                        <a href="{{ route('users.show', $user->id) }}" class="btn btn-xs btn-success"><i class="fa fa-eye"></i></a>
+                                                    @endcan
+                                                    @can('user_edit')
+                                                        <a href="{{ route('users.edit', $user->id) }}" class="btn btn-xs btn-info"><i class="fa fa-pencil-alt"></i></a>
+                                                    @endcan
+                                                    @can('user_destroy')
+                                                        <button type="submit" class="btn btn-xs btn-danger" data-toggle="modal" data-target="#deleteModal" data-id="{{ $user->id }}" data-name="{{ $user->name }}">
+                                                            <i class="fa fa-times"></i>
+                                                        </button>
+                                                    @endcan
                                                     
                                                 </td>
                                             </tr>

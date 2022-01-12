@@ -14,7 +14,8 @@ Route::get('/', function () {
 });
 
 Route::group(['middleware' => 'auth'], function() {
-    Route::get('/home', [HomeController::class, 'index'])->name('home');
+    Route::get('/start', [HomeController::class, 'start'])->name('start');
+    Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
     
     Route::get('/users', [UserController::class, 'index'])->name('users');
     Route::get('/users/create', [UserController::class, 'create'])->name('users.create');
